@@ -44,7 +44,7 @@ const AddTask = () => {
                     .then(res => {
                         console.log(res.data);
                         Swal.fire("Task Added Successfully!");
-                        navigate('/myTask');
+                        navigate('/dashboard/myTask');
                     })
                 refetch();
 
