@@ -27,6 +27,10 @@ const AddTask = () => {
             return;
         }
 
+       
+
+      
+
         
 
         data.addedBy = user.email;
@@ -91,7 +95,7 @@ const AddTask = () => {
                     <label className="label">
                         <span className="label-text">Image</span>
                     </label>
-                    <input {...register('task_image_url')} type="file" placeholder="task_image_url" required />
+                    <input {...register('task_image_url')} type="text" placeholder="task_image_url" required />
 
                 </div>
 
