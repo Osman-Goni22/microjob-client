@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import React, { useEffect, useState } from 'react';
 import { auth } from "../Firebase/Firebase_init";
 import axiosPublic from "../hooks/useAxiosPublic";
+
 export const AuthContext = createContext(null);
 
 
@@ -10,6 +11,8 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 const [loading, setLoading] = useState(true)
+
+
 
 
 useEffect(() => {
@@ -83,7 +86,8 @@ const AuthInfo = {
      signUp,
     logout,
     updateUserProfile,
-    signInWithGoogle
+    signInWithGoogle,
+   
 }
     return (
         <AuthContext.Provider value={AuthInfo}>

@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosPublic from '../../hooks/useAxiosPublic';
-
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const Register = () => {
     const navigate = useNavigate();
     const {signUp,updateUserProfile} = useContext(AuthContext)
@@ -15,40 +16,66 @@ const Register = () => {
     } = useForm();
 
 
-    const onSubmit = (data) =>{
-
-        if(data.role==='buyer'){
-            data.coin=50;
+    const onSubmit = async(data) =>{
+        if (!data.photo || !data.photo[0]) {
+            console.error("No file selected.");
+            return;
         }
-        else{
-            data.coin=10;
-        }
-        
-        signUp(data.email, data.password)
-        .then(res=>{
 
-            updateUserProfile(data.name, data.photo)
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (passwordRegex.test(password)){
+            
+        const formData = new FormData();
+
+        formData.append('image',data.photo[0]);
+
+        const res = await axiosPublic.post(image_hosting_api,formData,{
+            headers:{
+                'content-Type':'multipart/form-data'
+            }
+        })
+
+        console.log(res);
+        if(res.data.success){
+            const photo=res.data.data.display_url
+            if(data.role==='buyer'){
+                data.coin=50;
+            }
+            else{
+                data.coin=10;
+            }
+            
+            signUp(data.email, data.password)
             .then(res=>{
-                console.log('User profile updated successfully');
-                const user ={
-                    email:data.email,
-                    name:data.name,
-                    photo:data.photo,
-                    role:data.role,
-                    coin:data.coin
-                    
-
-                }
-
-                axiosPublic.post('/users', user)
+    
+                updateUserProfile(data.name, photo)
                 .then(res=>{
-                    console.log(res.data);
-                    navigate('/');
-                    
+                    console.log('User profile updated successfully');
+                    const user ={
+                        email:data.email,
+                        name:data.name,
+                        photo:data.photo,
+                        role:data.role,
+                        coin:data.coin
+                        
+    
+                    }
+    
+                    axiosPublic.post('/users', user)
+                    .then(res=>{
+                        console.log(res.data);
+                        navigate('/');
+                        
+                    })
                 })
+    
             })
 
-        })
+        }
+        
+        }
+
+        
     };
 
     return (
@@ -71,7 +98,7 @@ const Register = () => {
                     <label className="label">
                         <span className="label-text">Photo</span>
                     </label>
-                    <input {...register('photo', { required: true })} type="text" placeholder="Photo" className="input input-bordered" required />
+                    <input className="w-full h-full text-lg" {...register('photo', { required: true })} type="file" placeholder="Photo" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">

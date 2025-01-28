@@ -3,8 +3,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import useCurrentUser from '../Components/useCurrentUser';
 const NavBar = () => {
-
+    const [currentUser] = useCurrentUser();
     const navigate = useNavigate();
 
     const {user,logout }= useContext(AuthContext)
@@ -19,9 +20,16 @@ const NavBar = () => {
     
     const links = <div className='flex gap-5 text-xl justify-start'>
         <NavLink>Home</NavLink>
-        <NavLink to='/login'>Login</NavLink>
-        <NavLink to='/register'>Register</NavLink>
-        <NavLink>Join as Developer</NavLink>
+        {
+            user?<div className='flex gap-2'>
+                <Link to='/dashboard'>DashBoard</Link>
+                <Link >Available Coin {currentUser.coin}</Link>
+            </div>:<div className='flex gap-2'>
+                 <NavLink to='/login'>Login</NavLink>
+                 <NavLink to='/register'>Register</NavLink>
+            </div>
+        }
+        <div ><a href='https://github.com/Osman-Goni22/'>Join as Developer</a></div>
     </div>
 
     return (

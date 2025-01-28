@@ -1,14 +1,30 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import axiosPublic from '../hooks/useAxiosPublic';
 
 const Login = () => {
-    const {signInWithGoogle} = useContext(AuthContext)
+    const {signInWithGoogle,  login} = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
     const handleGoogleLogin = e=>{
         signInWithGoogle()
-        .then(()=>{
-            
+        .then((res)=>{
+            console.log('Login successful');
+            const user = {
+                email:res.user.email,
+                name:res.user.displayName,
+                photo:res.user.photoURL,
+                role:'worker',
+                coin:10
+            }
+            axiosPublic.post('/users/google', user)
+            .then(loginRes=>{
+                console.log(loginRes.data);
+                navigate('/')
+            })
         })
     }
     const {
@@ -21,6 +37,11 @@ const Login = () => {
     
         const onSubmit = (data) =>{
             console.log(data)
+         
+            login(data.email, data.password)
+            .then(res=>{
+                navigate('/');
+            })
           
         };
 

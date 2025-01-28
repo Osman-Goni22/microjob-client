@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL:'http://localhost:3000'
+    baseURL:'https://b10-a12-server-iota.vercel.app'
 })
 
 export default axiosPublic;
