@@ -22,8 +22,8 @@ const Register = () => {
             return;
         }
 
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        if (passwordRegex.test(password)){
+     
+      
             
         const formData = new FormData();
 
@@ -73,7 +73,7 @@ const Register = () => {
 
         }
         
-        }
+        
 
         
     };
