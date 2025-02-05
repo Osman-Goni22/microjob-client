@@ -33,9 +33,9 @@
 
 <h2>Guidelines to run the project </h2>
 <p>Give the following commands</p>
-<li>np install </li>
+<li>npm install </li>
 <li>install all the dependencis given above</li>
-<li>make the .env file and make the variables</li>
+<li>make the .env.local file and make DB_USER and DB_PASS  variables</li>
 
 
 <h2>Live Link: https://microjob-90188.web.app/</h2>
