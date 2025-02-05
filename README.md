@@ -31,3 +31,11 @@
 <li>sweetalert2</li>
 <li>axios</li>
 
+<h2>Guidelines to run the project </h2>
+<p>Give the following commands</p>
+<li>np install </li>
+<li>install all the dependencis given above</li>
+<li>make the .env file and make the variables</li>
+
+
+<h2>Live Link: https://microjob-90188.web.app/</h2>
