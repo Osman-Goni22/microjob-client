@@ -1,10 +1,12 @@
-![image](https://github.com/user-attachments/assets/482bdb07-8dee-4c3f-849f-ab273eceab09)
-
-![image](https://github.com/user-attachments/assets/a2518608-7612-4b58-b836-d32bf20a3ea6)
 
 
 <h2>Overview: </h2>
 <p>It's a platform serves as a market place where buyers (clients) posts jobs and workers (freelancer) accept them. Payments are given through the platform and a commision or service fee is charged to generate revenue.</p>
+
+![image](https://github.com/user-attachments/assets/482bdb07-8dee-4c3f-849f-ab273eceab09)
+
+![image](https://github.com/user-attachments/assets/a2518608-7612-4b58-b836-d32bf20a3ea6)
+
 <h2>The technologies used: </h2>
 <li>Tailwind css</li>
 <li>javascript</li>
